@@ -61,3 +61,35 @@
    - Then access the container shell using below command
 
      `docker attach <container id>`
+
+10. cleanup the docker
+    `docker image prune -a -f`
+
+11. Create a docker image with Git installed
+
+- Create a docker file (Dockerfile) with following commands
+
+  ```
+     FROM alpine:latest
+     RUN apk update
+     RUN apk add git
+
+  ```
+
+- Run following command using above Dockerfile
+
+  `docker build -t <image_name> .`
+
+- Create a container
+
+  ` docker run -itd <image_name >` /bin/sh
+
+- Enter into container shell
+
+  `docker attach container_id`
+
+##### Doubts
+
+1. why tag should be there in lab 9
+2. why some -itd & -dit
+3. what is entrypoint
