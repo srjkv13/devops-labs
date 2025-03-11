@@ -1,26 +1,34 @@
 ## Docker Commands
 
 1. ### Run a container
+
    `docker run <image-name>` it will run all the containers from the selected images
-2. ### List the images
+
+2. ### Build an image
+
+   `docker image build -t <image_name:ver>`
+
+3. ### Start a container
+   ` docker container run -d  --name <con_name>  <image_name:ver>`
+4. ### List the images
 
    `docker images` - display the images in use
 
    `docker images -a` - display all the images
 
-3. ### List the containers
+5. ### List the containers
 
    `docker ps` - display the running containers
 
    `docker ps -a` - display all the containers
 
-4. ### filter the images
+6. ### filter the images
 
    `docker images --filter=reference='alpine' `
 
    where `alpine` is the container id
 
-5. ### export a container
+7. ### export a container
 
    `docker export aa717d51d7a5 > <file name>`
 
@@ -28,44 +36,44 @@
 
    Note: Exporting a container will not store metadata info
 
-6. ### import a container
+8. ### import a container
 
    `docker import - impnginx < <file name>`
 
    where `impnginx` as image name, it will create a new image
 
-7. ### save a container externally
+9. ### save a container externally
 
    `docker save -o alpine.tar <image name>`
 
    Note : saving container will store all metadata info
 
-8. ### Load container archived file to docker
+10. ### Load container archived file to docker
 
-   `docker load < alpine.tar`
+    `docker load < alpine.tar`
 
-   Note: It imports alpine.tar with metadata info, if we are using import statement it will create a new image
+    Note: It imports alpine.tar with metadata info, if we are using import statement it will create a new image
 
-9. ### Accessing a container shell
+11. ### Accessing a container shell
 
-   - create an image Eg: ubuntu
+    - create an image Eg: ubuntu
 
-     `docker run -dit ubuntu`
+      `docker run -dit ubuntu`
 
-     were d - dettached mode, i - interactive mode and t - provides a terminal
+      were d - dettached mode, i - interactive mode and t - provides a terminal
 
-   - Accessing the container shell
+    - Accessing the container shell
 
-     `docker exec -t <container id> bash`
+      `docker exec -t <container id> bash`
 
-   - Then access the container shell using below command
+    - Then access the container shell using below command
 
-     `docker attach <container id>`
+      `docker attach <container id>`
 
-10. cleanup the docker
+12. Cleanup the docker images
     `docker image prune -a -f`
 
-11. Create a docker image with Git installed
+13. Create a docker image with Git installed
 
 - Create a docker file (Dockerfile) with following commands
 
@@ -87,6 +95,23 @@
 - Enter into container shell
 
   `docker attach container_id`
+
+14. Copying files from localhost to docker container
+
+    ```
+    # Use NGINX Alpine as the base image
+    FROM nginx:alpine
+
+    # Set the maintainer label
+    LABEL maintainer="Collabnix"
+
+    # Copy the index.html file to the NGINX default web directory
+    COPY index.html /usr/share/nginx/html/
+
+    # Start NGINX in the foreground
+    ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+    ```
 
 ##### Doubts
 
